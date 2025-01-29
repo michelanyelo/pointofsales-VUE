@@ -1,11 +1,9 @@
 <script setup>
-import NavComp from '@/components/NavComp.vue';
-
-NavComp
+import NavMainComp from '@/components/navigation/NavMainComp.vue';
 </script>
 
 <template>
-  <NavComp />
+  <NavMainComp />
   <div>
     <h1>Shop View</h1>
   </div>
