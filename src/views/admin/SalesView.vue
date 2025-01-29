@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <h1>Resumen de ventas</h1>
+    <h1 class="text-4xl font-black">Resumen de ventas</h1>
   </div>
 </template>
 
