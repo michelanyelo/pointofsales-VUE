@@ -5,8 +5,7 @@ import NavAdmin from '@/components/navigation/NavAdmin.vue';
 
 <template>
   <NavAdmin />
-
-  <div>
+  <div class="pt-32 container mx-auto lg:min-h-screen">
     <RouterView />
   </div>
 </template>
