@@ -1,9 +1,8 @@
 import './assets/main.css'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { plugin } from '@formkit/vue'
-import defaultConfig from '../formkit.config'
+import { plugin, defaultConfig } from '@formkit/vue'
+// import defaultConfig from '../formkit.config'
 
 import App from './App.vue'
 import router from './router'
