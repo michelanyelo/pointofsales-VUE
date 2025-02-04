@@ -5,6 +5,8 @@ import { plugin, defaultConfig } from '@formkit/vue'
 import { rootClasses } from '../formkit.theme.mjs'
 import App from './App.vue'
 import router from './router'
+import { VueFire, VueFireAuth } from 'vuefire'
+import { firebaseApp } from './config/firebase'
 
 // Configuración de FormKit
 const config = defaultConfig({
@@ -14,6 +16,11 @@ const config = defaultConfig({
 })
 
 const app = createApp(App)
+
+app.use(VueFire, {
+  firebaseApp,
+  modules: [VueFireAuth()],
+})
 
 app.use(createPinia())
 app.use(plugin, config)
