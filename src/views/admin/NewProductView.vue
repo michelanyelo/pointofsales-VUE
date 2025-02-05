@@ -1,9 +1,25 @@
 <script setup>
+import { reactive } from 'vue';
 import NavlinkComp from '@/components/navigation/NavlinkComp.vue';
 import useImage from '@/composables/useImage';
+import { useProductsStore } from '@/stores/products';
 
 // Importa las funciones y variables del composable
 const { onFileChange, isImageUploaded, url } = useImage();
+
+const formData = reactive({
+  name: 'Sudadera',
+  category: '',
+  price: '',
+  stock: '',
+  image: ''
+});
+
+const { createProduct } = useProductsStore();
+const submitHandler = data => {
+  console.log(data);
+}
+
 </script>
 
 <template>
@@ -13,23 +29,27 @@ const { onFileChange, isImageUploaded, url } = useImage();
     <div class="flex justify-center bg-white shadow">
       <div class="mt-10 p-10 w-full 2xl:w-2/4">
         <FormKit type="form" submit-label="Agregar"
-          incomplete-message="Lo sentimos, no todos los campos están rellenados correctamente">
+          incomplete-message="Lo sentimos, no todos los campos están rellenados correctamente" @submit="submitHandler">
           <FormKit type="text" label="Nombre" name="name" placeholder="Nombre del producto..." validation="required"
-            :validation-messages="{ required: 'El nombre del producto es obligatorio' }" />
+            :validation-messages="{ required: 'El nombre del producto es obligatorio' }"
+            v-model.trim="formData.nombre" />
           <FormKit type="file" label="Imagen" name="image" validation="required"
             :validation-messages="{ required: 'La imagen del producto es obligatoria' }"
-            accept=".jpg, .png, .jpeg, .webp" @change="onFileChange" />
+            accept=".jpg, .png, .jpeg, .webp" @change="onFileChange" v-model.trim="formData.image" />
           <!-- Mostrar la vista previa de la imagen -->
           <div v-if="isImageUploaded">
             <h3>Vista previa:</h3>
             <img :src="url" alt="Vista previa" class="w-32" />
           </div>
           <FormKit type="select" label="Categoría" name="category" validation="required"
-            :validation-messages="{ required: 'La categoría del producto es obligatoria' }" :options="[1, 2, 3]" />
+            :validation-messages="{ required: 'La categoría del producto es obligatoria' }" :options="[1, 2, 3]"
+            v-model.number="formData.category" />
           <FormKit type="number" label="Precio" name="price" placeholder="Precio del producto..." validation="required"
-            :validation-messages="{ required: 'El precio del producto es obligatorio' }" min="1" />
+            :validation-messages="{ required: 'El precio del producto es obligatorio' }" min="1"
+            v-model.number="formData.price" />
           <FormKit type="number" label="Stock" name="stock" placeholder="Cantidad disponible..." validation="required"
-            :validation-messages="{ required: 'El stock del producto es obligatorio' }" min="1" />
+            :validation-messages="{ required: 'El stock del producto es obligatorio' }" min="1"
+            v-model.number="formData.stock" />
         </FormKit>
       </div>
     </div>
