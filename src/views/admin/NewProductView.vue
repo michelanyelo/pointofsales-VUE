@@ -15,7 +15,7 @@ const formData = reactive({
   image: ''
 });
 
-const { createProduct } = useProductsStore();
+const productsStore = useProductsStore();
 const submitHandler = data => {
   console.log(data);
 }
@@ -42,8 +42,8 @@ const submitHandler = data => {
             <img :src="url" alt="Vista previa" class="w-32" />
           </div>
           <FormKit type="select" label="Categoría" name="category" validation="required"
-            :validation-messages="{ required: 'La categoría del producto es obligatoria' }" :options="[1, 2, 3]"
-            v-model.number="formData.category" />
+            :validation-messages="{ required: 'La categoría del producto es obligatoria' }"
+            :options="productsStore.categoryOptions" v-model.number="formData.category" />
           <FormKit type="number" label="Precio" name="price" placeholder="Precio del producto..." validation="required"
             :validation-messages="{ required: 'El precio del producto es obligatorio' }" min="1"
             v-model.number="formData.price" />
