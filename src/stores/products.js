@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { computed } from "vue";
 
+
 export const useProductsStore = defineStore('products', () => {
 
   const categories = [
@@ -32,12 +33,7 @@ export const useProductsStore = defineStore('products', () => {
     ];
   });
 
-  async function createProduct(product) {
-    console.log(product);
-  }
-
   return {
-    createProduct,
     categoryOptions
   }
 });
