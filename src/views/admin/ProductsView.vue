@@ -1,9 +1,9 @@
 <script setup>
 import NavlinkComp from '@/components/navigation/NavlinkComp.vue';
-import { useFirebaseStore } from '@/stores/firebase';
+import { useProductsStore } from '@/stores/products';
 import productComp from '@/components/ProductComp.vue';
 
-const productsDatabase = useFirebaseStore();
+const productsStore = useProductsStore();
 
 </script>
 
@@ -12,10 +12,10 @@ const productsDatabase = useFirebaseStore();
     <NavlinkComp url-name="new-product">Agregar</NavlinkComp>
     <h1 class="text-4xl font-black mt-4">Productos</h1>
 
-    <p v-if="productsDatabase.noResults">No hay resultados</p>
+    <p v-if="productsStore.noResults">No hay resultados</p>
 
     <ul v-else role="list" class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
-      <productComp v-for="product in productsDatabase.productsCollection" :key="product.id" :product="product" />
+      <productComp v-for="product in productsStore.productsCollection" :key="product.id" :product="product" />
     </ul>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup>
-import { useFirebaseStore } from '@/stores/firebase';
+import { useProductsStore } from '@/stores/products';
 import { formatCurrency } from '@/helpers/currency';
 
-const firebaseStore = useFirebaseStore();
+const productsStore = useProductsStore();
 
 defineProps({
   product: Object
@@ -27,7 +27,7 @@ defineProps({
         </svg>
       </RouterLink>
 
-      <button type="button" @click="firebaseStore.deleteProduct(product.id)" class="hover:cursor-pointer">
+      <button type="button" @click="productsStore.deleteProduct(product.id)" class="hover:cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-6 h-6 text-red-500">
           <path stroke-linecap="round" stroke-linejoin="round"

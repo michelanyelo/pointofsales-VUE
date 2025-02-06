@@ -4,11 +4,9 @@ import { useRouter } from 'vue-router';
 import NavlinkComp from '@/components/navigation/NavlinkComp.vue';
 import useImage from '@/composables/useImage';
 import { useProductsStore } from '@/stores/products';
-import { useFirebaseStore } from '@/stores/firebase';
 
 // Importa las funciones y variables del composable
 const { onFileChange, isImageUploaded, url } = useImage();
-const firebaseStore = useFirebaseStore();
 const productsStore = useProductsStore();
 
 const router = useRouter();
@@ -26,7 +24,7 @@ const submitHandler = async data => {
   const { ...values } = data
 
   try {
-    await firebaseStore.createProduct({
+    await productsStore.createProduct({
       ...values,
       image: url.value
     });

@@ -5,7 +5,6 @@ import { doc } from 'firebase/firestore'
 import { useFirestore, useDocument } from 'vuefire'
 import NavlinkComp from '@/components/navigation/NavlinkComp.vue'
 import { useProductsStore } from '@/stores/products'
-import { useFirebaseStore } from '@/stores/firebase'
 import useImage from '@/composables/useImage'
 
 // consultar firestore
@@ -18,7 +17,6 @@ const product = useDocument(docRef);
 
 const { onFileChange, isImageUploaded, url } = useImage()
 const productsStore = useProductsStore();
-const firebaseStore = useFirebaseStore();
 
 const formData = reactive({
   name: '',
@@ -45,7 +43,7 @@ watch(product, (product) => {
 
 const submitHandler = async data => {
   try {
-    await firebaseStore.updateProduct(docRef, { ...data, url });
+    await productsStore.updateProduct(docRef, { ...data, url });
     router.push({ name: 'products' });
   } catch (error) {
     console.error(error);
