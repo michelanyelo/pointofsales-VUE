@@ -14,7 +14,7 @@ const productsStore = useProductsStore();
 const router = useRouter();
 
 const formData = reactive({
-  name: 'Sudadera',
+  name: '',
   category: '',
   price: '',
   stock: '',

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useFirestore, useCollection } from "vuefire";
-import { collection, addDoc, where, query, limit, orderBy } from "firebase/firestore";
+import { collection, addDoc, where, query, orderBy } from "firebase/firestore";
 import { computed } from "vue";
 
 export const useFirebaseStore = defineStore('firebase', () => {
