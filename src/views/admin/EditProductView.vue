@@ -56,7 +56,7 @@ const submitHandler = async data => {
 
 <template>
   <div class="mt-10">
-    <NavlinkComp url-name="products">
+    <NavlinkComp :to="{ name: 'products' }">
       Volver
     </NavlinkComp>
     <h1 class="text-4xl my-10 font-extrabold">Editar Producto</h1>

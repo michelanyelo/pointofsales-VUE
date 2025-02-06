@@ -1,7 +1,7 @@
 <script setup>
 import NavlinkComp from '@/components/navigation/NavlinkComp.vue';
 import { useFirebaseStore } from '@/stores/firebase';
-import productComp from '@/components/productComp.vue';
+import productComp from '@/components/ProductComp.vue';
 
 const productsDatabase = useFirebaseStore();
 
