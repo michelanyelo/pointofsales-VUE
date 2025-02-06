@@ -15,7 +15,7 @@ export const useFirebaseStore = defineStore('firebase', () => {
   const q = query(
     productsRef,
     where('stock', '>', 0),
-    orderBy('price', 'desc'),
+    orderBy('name', 'asc'),
   );
 
   const productsCollection = useCollection(q);
