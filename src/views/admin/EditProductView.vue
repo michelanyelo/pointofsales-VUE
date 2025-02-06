@@ -5,6 +5,7 @@ import { doc } from 'firebase/firestore'
 import { useFirestore, useDocument } from 'vuefire'
 import NavlinkComp from '@/components/navigation/NavlinkComp.vue'
 import { useProductsStore } from '@/stores/products'
+import { useFirebaseStore } from '@/stores/firebase'
 import useImage from '@/composables/useImage'
 
 // consultar firestore
@@ -16,7 +17,8 @@ const docRef = doc(db, 'products', idProduct);
 const product = useDocument(docRef);
 
 const { onFileChange, isImageUploaded, url } = useImage()
-const productsStore = useProductsStore()
+const productsStore = useProductsStore();
+const firebaseStore = useFirebaseStore();
 
 const formData = reactive({
   name: '',
@@ -41,11 +43,20 @@ watch(product, (product) => {
   Object.assign((formData), product);
 });
 
+const submitHandler = async data => {
+  try {
+    await firebaseStore.updateProduct(docRef, { ...data, url });
+    router.push({ name: 'products' });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 </script>
 
 <template>
   <div class="mt-10">
-    <NavlinkComp to="products">
+    <NavlinkComp url-name="products">
       Volver
     </NavlinkComp>
     <h1 class="text-4xl my-10 font-extrabold">Editar Producto</h1>
