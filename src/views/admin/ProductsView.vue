@@ -12,7 +12,9 @@ const productsDatabase = useFirebaseStore();
     <NavlinkComp url-name="new-product">Agregar</NavlinkComp>
     <h1 class="text-4xl font-black mt-4">Productos</h1>
 
-    <ul role="list" class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
+    <p v-if="productsDatabase.noResults">No hay resultados</p>
+
+    <ul v-else role="list" class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
       <productComp v-for="product in productsDatabase.productsCollection" :key="product.id" :product="product" />
     </ul>
   </div>
