@@ -78,12 +78,17 @@ export const useFirebaseStore = defineStore('firebase', () => {
   // Propiedad computada para verificar si no hay resultados
   const noResults = computed(() => productsCollection.value.length === 0);
 
+  const filteredProducts = computed(() => {
+    return productsCollection.value;
+  });
+
   // Retorna las funciones y propiedades del store
   return {
     createProduct,
     updateProduct,
     deleteProduct,
     productsCollection,
-    noResults
+    noResults,
+    filteredProducts
   };
 });
