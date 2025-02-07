@@ -1,5 +1,8 @@
 <script setup>
+import { useCartStore } from '@/stores/cart';
 import { formatCurrency } from '@/helpers/currency';
+
+const cartStore = useCartStore();
 
 defineProps({
   item: Object
@@ -15,7 +18,7 @@ defineProps({
       <p>{{ formatCurrency(item.price) }}</p>
 
       <select name="amount" class="w-48 text-center p-1 rounded-lg bg-white">
-        <option v-for="i in 5" :value="i">{{ i }}</option>
+        <option v-for="i in cartStore.checkProductStock(item)" :value="i">{{ i }}</option>
       </select>
     </div>
   </li>
