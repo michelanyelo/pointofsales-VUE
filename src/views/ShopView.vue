@@ -1,6 +1,7 @@
 <script setup>
 import NavMainComp from '@/components/navigation/NavMainComp.vue';
 import ProductCardComp from '@/components/ProductCardComp.vue';
+import CartComp from '@/components/CartComp.vue';
 import { useProductsStore } from '@/stores/products';
 
 const productsStore = useProductsStore();
@@ -19,8 +20,8 @@ const productsStore = useProductsStore();
       </div>
     </div>
 
-    <aside class="lg:w-1/3 lg:h-screen lg:overflow-y-scroll pt-10 pb-32 px-10">
-      <p>Carro aqui</p>
+    <aside class="lg:w-1/3 lg:h-screen lg:overflow-y-scroll pt-20 pb-32 px-10">
+      <CartComp />
     </aside>
   </main>
 </template>
