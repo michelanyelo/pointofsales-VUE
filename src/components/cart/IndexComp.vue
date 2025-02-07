@@ -11,14 +11,14 @@ const cartStore = useCartStore();
   <p v-if="cartStore.isEmpty" class="text-xl text-center text-gray-900">Tu carro está vacío. ¡Descubre las últimas
     tendencias de moda que tenemos para ti!</p>
   <div v-else>
-    <p class="text-xl font-bold text-gray-600">Carro ({{ cartStore.items.length }})</p>
+    <p class="text-xl font-bold text-gray-600">Resumen de la compra </p>
     <ul role="list" class="mt-6 divide-y divide-gray-200">
       <ItemComp v-for="item in cartStore.items" :key="item.id" :item="item" />
     </ul>
 
     <dl class="space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-700">
       <AmountComp>
-        <template #label>Subtotal: </template>
+        <template #label>Productos ({{ cartStore.totalQuantity }}) </template>
         {{ formatCurrency(cartStore.subtotal) }}
       </AmountComp>
 

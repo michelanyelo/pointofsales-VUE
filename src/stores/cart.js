@@ -5,6 +5,7 @@ export const useCartStore = defineStore('cart', () => {
 
   const items = ref([]);
   const subtotal = ref(0);
+  const totalQuantity = ref(0);
 
   const max_products = 5
 
@@ -22,6 +23,10 @@ export const useCartStore = defineStore('cart', () => {
     deep: true
   });
 
+  watch(items, () => {
+    totalQuantity.value = items.value.reduce((total, item) => total + item.quantity, 0);
+  }, { deep: true });
+
   const isEmpty = computed(() => items.value.length === 0);
 
   const checkProductStock = computed(() => {
@@ -34,6 +39,7 @@ export const useCartStore = defineStore('cart', () => {
     isEmpty,
     items,
     checkProductStock,
-    subtotal
+    subtotal,
+    totalQuantity
   }
 });
