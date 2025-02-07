@@ -1,6 +1,8 @@
 <script setup>
 import { useCartStore } from '@/stores/cart';
 import ItemComp from './ItemComp.vue';
+import AmountComp from './AmountComp.vue';
+import { formatCurrency } from '@/helpers/currency';
 
 const cartStore = useCartStore();
 </script>
@@ -13,6 +15,23 @@ const cartStore = useCartStore();
     <ul role="list" class="mt-6 divide-y divide-gray-200">
       <ItemComp v-for="item in cartStore.items" :key="item.id" :item="item" />
     </ul>
+
+    <dl class="space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-700">
+      <AmountComp>
+        <template #label>Subtotal: </template>
+        {{ formatCurrency(300) }}
+      </AmountComp>
+
+      <AmountComp>
+        <template #label>Impuestos: </template>
+        {{ formatCurrency(300) }}
+      </AmountComp>
+
+      <AmountComp>
+        <template #label>Total a pagar: </template>
+        {{ formatCurrency(300) }}
+      </AmountComp>
+    </dl>
   </div>
 </template>
 
