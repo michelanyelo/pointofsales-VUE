@@ -13,6 +13,7 @@ export const useCartStore = defineStore('cart', () => {
 
   return {
     addItem,
-    isEmpty
+    isEmpty,
+    items
   }
 });

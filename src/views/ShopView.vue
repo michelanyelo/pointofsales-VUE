@@ -1,7 +1,7 @@
 <script setup>
 import NavMainComp from '@/components/navigation/NavMainComp.vue';
 import ProductCardComp from '@/components/ProductCardComp.vue';
-import CartComp from '@/components/CartComp.vue';
+import CartComp from '@/components/cart/IndexComp.vue';
 import { useProductsStore } from '@/stores/products';
 
 const productsStore = useProductsStore();
