@@ -2,33 +2,42 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useCouponStore = defineStore('coupon', () => {
-
   const couponInput = ref('');
-  const hasMessage = ref(false);
-  const message = ref('');
+  const message = ref(''); // Almacena el mensaje (éxito o error)
+  const messageType = ref(''); // 'success' o 'error'
+  const discountPercent = ref(0);
+
   const VALID_COUPONS = [
-    { name: '10DESCUENTO', discount: .10 },
-    { name: '20DESCUENTO', discount: .20 }
+    { name: '10DESCUENTO', discount: 0.10 },
+    { name: '20DESCUENTO', discount: 0.20 }
   ];
 
   function applyCoupon() {
-    if (VALID_COUPONS.some(c => c.name === couponInput.value)) {
-      hasMessage.value = true;
-      message.value = "Aplicando..."
+    const validCoupon = VALID_COUPONS.find(c => c.name === couponInput.value);
+    if (validCoupon) {
+      messageType.value = 'success';
+      message.value = "Aplicando...";
+      setTimeout(() => {
+        discountPercent.value = validCoupon.discount;
+        message.value = "¡Descuento aplicado!";
+      }, 3000);
     } else {
-      hasMessage.value = true;
+      messageType.value = 'error';
       message.value = "El cupón no es válido. Verifica los datos y vuelve a intentar.";
     }
 
+    // Limpiar el mensaje después de 6 segundos
     setTimeout(() => {
-      message.value = ''
-    }, 5000);
+      message.value = '';
+      messageType.value = '';
+    }, 6000);
   }
 
   return {
     couponInput,
     applyCoupon,
-    hasMessage,
-    message
-  }
+    message,
+    messageType,
+    discountPercent
+  };
 });
