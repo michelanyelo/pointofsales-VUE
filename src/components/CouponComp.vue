@@ -25,6 +25,8 @@ const couponStore = useCouponStore();
     <button type="button" class="p-3 bg-green-400 font-semibold hover:cursor-pointer hover:bg-green-500 rounded-xl"
       @click="couponStore.applyCoupon">Agregar</button>
   </div>
+
+  <p v-if="couponStore.hasMessage" class="text-sm text-red-600">{{ couponStore.message }}</p>
 </template>
 
 <style scoped></style>
