@@ -1,4 +1,7 @@
 <script setup>
+import { useCouponStore } from '@/stores/coupons';
+
+const couponStore = useCouponStore();
 </script>
 
 <template>
@@ -16,10 +19,11 @@
 
     <!-- Input -->
     <input type="text" placeholder="Cupón de descuento"
-      class="flex-grow ml-2 bg-white border-none rounded-r-lg focus:outline-none placeholder:text-gray-600 placeholder:font-semibold" />
+      class="flex-grow ml-2 bg-white border-none rounded-r-lg focus:outline-none placeholder:text-gray-600 placeholder:font-semibold"
+      v-model="couponStore.couponInput" />
 
-    <button type="button"
-      class="p-3 bg-green-400 font-semibold hover:cursor-pointer hover:bg-green-500 rounded-xl">Agregar</button>
+    <button type="button" class="p-3 bg-green-400 font-semibold hover:cursor-pointer hover:bg-green-500 rounded-xl"
+      @click="couponStore.applyCoupon">Agregar</button>
   </div>
 </template>
 
