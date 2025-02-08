@@ -1,11 +1,8 @@
 <script setup>
 import { useCartStore } from '@/stores/cart';
 import { formatCurrency } from '@/helpers/currency';
-import { ref } from 'vue';
 
 const cartStore = useCartStore();
-
-const selectedQuantity = ref(1);
 
 defineProps({
   item: Object
@@ -20,9 +17,9 @@ defineProps({
       <h3 class="text-gray-900">{{ item.name }}</h3>
       <p>{{ formatCurrency(item.price) }}</p>
 
-      <select name="amount" class="w-48 text-center p-1 rounded-lg bg-white" v-model="selectedQuantity"
-        @change="cartStore.updateQuantity(item.id, selectedQuantity)">
-        <option v-for="i in cartStore.checkProductStock(item)" :value="i">{{ i }}</option>
+      <select name="amount" class="w-48 text-center p-1 rounded-lg bg-white"
+        @change="cartStore.updateQuantity(item.id, +$event.target.value)" :value="item.quantity">
+        <option v-for="i in cartStore.checkProductStock(item)" :key="i" :value="i">{{ i }}</option>
       </select>
     </div>
   </li>
