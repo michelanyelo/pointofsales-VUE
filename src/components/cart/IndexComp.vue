@@ -22,14 +22,14 @@ const cartStore = useCartStore();
         {{ formatCurrency(cartStore.subtotal) }}
       </AmountComp>
 
-      <AmountComp>
+      <!-- <AmountComp>
         <template #label>Impuestos: </template>
         {{ formatCurrency(300) }}
-      </AmountComp>
+      </AmountComp> -->
 
       <AmountComp>
         <template #label>Total a pagar: </template>
-        {{ formatCurrency(300) }}
+        {{ formatCurrency(cartStore.subtotal) }}
       </AmountComp>
     </dl>
   </div>
