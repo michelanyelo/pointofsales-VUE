@@ -38,6 +38,10 @@ export const useCartStore = defineStore('cart', () => {
     item.error = null; // Limpiar error si no hay problemas
   }
 
+  function removeItem(id) {
+    items.value = items.value.filter(item => item.id !== id)
+  }
+
   // Verificar si el carrito está vacío
   const isEmpty = computed(() => items.value.length === 0);
 
@@ -56,6 +60,7 @@ export const useCartStore = defineStore('cart', () => {
   return {
     addItem,
     updateQuantity,
+    removeItem,
     isEmpty,
     items,
     checkProductStock,
