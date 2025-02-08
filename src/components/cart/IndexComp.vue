@@ -25,9 +25,9 @@ const couponStore = useCouponStore();
         {{ formatCurrency(cartStore.subtotal) }}
       </AmountComp>
 
-      <AmountComp>
+      <AmountComp v-if="couponStore.isApplied" class="text-green-700">
         <template #label>Descuentos: </template>
-        {{ formatCurrency(couponStore.discount) }}
+        <p class="text-green-700 font-semibold"> -{{ formatCurrency(couponStore.discount) }}</p>
       </AmountComp>
 
       <AmountComp>

@@ -4,7 +4,8 @@ const couponStore = useCouponStore();
 </script>
 
 <template>
-  <div class="flex items-center w-full mb-4 bg-white rounded-lg shadow-sm mt-4">
+  <div class="flex items-center w-full mb-4 bg-white rounded-lg shadow-sm mt-4"
+    :class="{ 'opacity-50': couponStore.isApplied }">
     <!-- Ícono -->
     <span class="flex items-center justify-center w-12 p-3">
       <div class="bg-green-100 rounded-md px-2 py-1">
@@ -19,11 +20,12 @@ const couponStore = useCouponStore();
     <!-- Input -->
     <input type="text" placeholder="Cupón de descuento"
       class="flex-grow ml-2 bg-white border-none rounded-r-lg focus:outline-none placeholder:text-gray-600 placeholder:font-semibold"
-      v-model="couponStore.couponInput" />
+      v-model="couponStore.couponInput" :disabled="couponStore.isApplied" />
 
     <!-- Botón -->
-    <button type="button" class="p-3 bg-green-400 font-semibold hover:cursor-pointer hover:bg-green-500 rounded-xl"
-      @click="couponStore.applyCoupon">Agregar</button>
+    <button type="button"
+      class="p-3 bg-green-400 font-semibold hover:cursor-pointer hover:bg-green-500 rounded-xl disabled:cursor-auto disabled:bg-green-200"
+      @click="couponStore.applyCoupon" :disabled="couponStore.isApplied">Agregar</button>
   </div>
 
   <!-- Mensaje -->
