@@ -2,6 +2,7 @@
 import { useCartStore } from '@/stores/cart';
 import ItemComp from './ItemComp.vue';
 import AmountComp from './AmountComp.vue';
+import CouponComp from '../CouponComp.vue';
 import { formatCurrency } from '@/helpers/currency';
 
 const cartStore = useCartStore();
@@ -32,6 +33,9 @@ const cartStore = useCartStore();
         {{ formatCurrency(cartStore.subtotal) }}
       </AmountComp>
     </dl>
+
+    <CouponComp />
+
   </div>
 </template>
 
