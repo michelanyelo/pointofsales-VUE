@@ -1,16 +1,21 @@
 import { computed, ref, watchEffect } from "vue";
 import { defineStore } from "pinia";
+import { useCouponStore } from "./coupons";
 
 export const useCartStore = defineStore('cart', () => {
+  const couponStore = useCouponStore();
   const items = ref([]);
-  const subtotal = ref(0);
-  const totalQuantity = ref(0);
   const max_products = 5;
+  const totalQuantity = ref(0);
+  const subtotal = ref(0);
+  const total = ref(0);
+
 
   // Observador para calcular subtotal y cantidad total
   watchEffect(() => {
     subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0);
     totalQuantity.value = items.value.reduce((total, item) => total + item.quantity, 0);
+    total.value = subtotal.value - couponStore.discount;
   });
 
   // Agregar un artículo al carrito
@@ -66,5 +71,6 @@ export const useCartStore = defineStore('cart', () => {
     checkProductStock,
     subtotal,
     totalQuantity,
+    total
   };
 });

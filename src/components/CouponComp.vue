@@ -4,7 +4,7 @@ const couponStore = useCouponStore();
 </script>
 
 <template>
-  <div class="flex items-center w-full mb-4 bg-white rounded-lg shadow-sm">
+  <div class="flex items-center w-full mb-4 bg-white rounded-lg shadow-sm mt-4">
     <!-- Ícono -->
     <span class="flex items-center justify-center w-12 p-3">
       <div class="bg-green-100 rounded-md px-2 py-1">
@@ -29,7 +29,7 @@ const couponStore = useCouponStore();
   <!-- Mensaje -->
   <p v-if="couponStore.message" :class="[
     'text-sm',
-    couponStore.messageType === 'success' ? 'text-green-600' : 'text-red-600'
+    couponStore.messageType === 'success' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'
   ]">
     {{ couponStore.message }}
   </p>

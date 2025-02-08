@@ -1,11 +1,13 @@
 <script setup>
 import { useCartStore } from '@/stores/cart';
+import { useCouponStore } from '@/stores/coupons';
 import ItemComp from './ItemComp.vue';
 import AmountComp from './AmountComp.vue';
 import CouponComp from '../CouponComp.vue';
 import { formatCurrency } from '@/helpers/currency';
 
 const cartStore = useCartStore();
+const couponStore = useCouponStore();
 </script>
 
 <template>
@@ -23,14 +25,14 @@ const cartStore = useCartStore();
         {{ formatCurrency(cartStore.subtotal) }}
       </AmountComp>
 
-      <!-- <AmountComp>
-        <template #label>Impuestos: </template>
-        {{ formatCurrency(300) }}
-      </AmountComp> -->
+      <AmountComp>
+        <template #label>Descuentos: </template>
+        {{ formatCurrency(couponStore.discount) }}
+      </AmountComp>
 
       <AmountComp>
         <template #label>Total a pagar: </template>
-        {{ formatCurrency(cartStore.subtotal) }}
+        {{ formatCurrency(cartStore.total) }}
       </AmountComp>
     </dl>
 
