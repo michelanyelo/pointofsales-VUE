@@ -16,8 +16,7 @@ defineProps({
 
 <template>
   <div class="border-t border-gray-200 space-y-2 py-6">
-    <h2 class="text-2xl font-black">Detalles Venta: {{ }}</h2>
-    <p class="text-xl font-black text-gray-500">Producto vendido N°{{ index + 1 }}</p>
+    <h2 class="text-2xl font-black">Detalle venta N°{{ index + 1 }}</h2>
     <ul role="list" class="mt-6 divide-y divide-gray-200 border-t border-gray-200 text-sm font-medium">
       <li v-for="item in sale.items" :key="item.id" class="flex space-x-6 py-6">
         <img :src="item.image" :alt="'Imagen de ' + item.name" class="h-24 w-24 flex-none rounded-lg">

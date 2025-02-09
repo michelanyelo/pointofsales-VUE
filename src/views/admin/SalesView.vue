@@ -24,9 +24,9 @@ const salesStore = useSalesStore();
         <p class="text-center text-xl font-bold text-green-600 animate-pulse" v-if="!salesStore.isDateSelected">
           Selecciona un rango de fechas para ver las ventas
         </p>
-        <p class="text-center text-lg" v-else>
+        <p class="text-center text-xl" v-else>
           Ventas de la fecha:
-          <span class="font-black text-green-600">{{ salesStore.date }}</span>
+          <span class="font-black text-green-600 ml-1">{{ salesStore.date.join(" - ") }}</span>
         </p>
         <div class="space-y-5" v-if="salesStore.salesCollection.length">
           <SaleDetailComp v-for="(sale, index) in salesStore.salesCollection" :key="sale.id" :sale="sale"
