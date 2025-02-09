@@ -4,7 +4,6 @@ import { getCurrentDate } from "@/helpers/date";
 import { useCouponStore } from "./coupons";
 import { collection, addDoc } from "firebase/firestore";
 import { useFirestore } from "vuefire";
-import { reset } from "@formkit/vue";
 
 export const useCartStore = defineStore('cart', () => {
   const couponStore = useCouponStore();
@@ -21,6 +20,11 @@ export const useCartStore = defineStore('cart', () => {
     subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0);
     totalQuantity.value = items.value.reduce((total, item) => total + item.quantity, 0);
     total.value = subtotal.value - couponStore.discount;
+
+    // Limpiar el cupón si el carrito está vacío
+    if (items.value.length === 0) {
+      couponStore.$reset();
+    }
   });
 
   // Agregar un artículo al carrito
@@ -49,7 +53,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function removeItem(id) {
-    items.value = items.value.filter(item => item.id !== id)
+    items.value = items.value.filter(item => item.id !== id);
   }
 
   async function checkout() {
@@ -76,6 +80,7 @@ export const useCartStore = defineStore('cart', () => {
       });
       console.log("Compra realizada exitosamente.");
       $reset();
+      couponStore.$reset();
     } catch (error) {
       console.error(error);
     }
@@ -86,7 +91,6 @@ export const useCartStore = defineStore('cart', () => {
     items.value = [];
     subtotal.value = 0;
     total.value = 0;
-    couponStore.$reset();
   }
 
   // Verificar si el carrito está vacío

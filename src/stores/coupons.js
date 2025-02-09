@@ -15,9 +15,13 @@ export const useCouponStore = defineStore('coupon', () => {
     { name: '20DESCUENTO', discount: 0.20 }
   ];
 
-  watch(discountPercent, () => {
-    discount.value = (cartStore.subtotal * discountPercent.value).toFixed(2);
-  });
+  // Observador para calcular el descuento
+  watch(
+    [() => cartStore.subtotal, discountPercent], // Observar ambos valores
+    ([newSubtotal, newDiscountPercent]) => {
+      discount.value = (newSubtotal * newDiscountPercent).toFixed(2);
+    }
+  );
 
   function applyCoupon() {
     const validCoupon = VALID_COUPONS.find(c => c.name === couponInput.value);
