@@ -1,16 +1,21 @@
 <script setup>
+import { computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
 import { formatCurrency } from '@/helpers/currency';
 
 const productsStore = useProductsStore();
-
-defineProps({
-  product: Object
+const props = defineProps({
+  product: {
+    type: Object
+  }
 });
+
+const isProductOutStock = computed(() => props.product.stock === 0);
 </script>
 
 <template>
-  <li class="flex items-center space-x-6 border border-gray-200 p-6 bg-white shadow">
+  <li class="flex items-center space-x-6 border border-gray-200 p-6 bg-white shadow"
+    :class="{ 'opacity-30': isProductOutStock }">
     <img :src="product.image" :alt="product.name" class="h-28 w-28">
     <div class="space-y-2 flex-auto">
       <h3 class="text-gray-900">{{ product.name }}</h3>

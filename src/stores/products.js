@@ -22,8 +22,7 @@ export const useProductsStore = defineStore('products', () => {
   // Consulta para obtener productos con stock mayor a 0, ordenados por nombre
   const q = query(
     productsRef,
-    where('stock', '>', 0),
-    orderBy('name', 'asc')
+    orderBy('stock', 'asc')
   );
 
   const productsCollection = useCollection(q);
@@ -45,7 +44,9 @@ export const useProductsStore = defineStore('products', () => {
 
   // Filtrado de productos por categoría
   const filteredProducts = computed(() => {
-    return productsCollection.value.filter(product => product.category === selectedCategory.value);
+    return productsCollection.value
+      .filter(product => product.category === selectedCategory.value)
+      .filter(product => product.stock > 0);
   });
 
   // Función para crear un producto en Firestore
