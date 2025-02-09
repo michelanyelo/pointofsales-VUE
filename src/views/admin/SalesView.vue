@@ -1,5 +1,8 @@
 <script setup>
 import { useSalesStore } from '@/stores/sales';
+import SaleDetailComp from '@/components/sales/SaleDetailComp.vue'
+import { formatCurrency } from '@/helpers/currency';
+
 const salesStore = useSalesStore();
 </script>
 
@@ -25,6 +28,18 @@ const salesStore = useSalesStore();
           Ventas de la fecha:
           <span class="font-black text-green-600">{{ salesStore.date }}</span>
         </p>
+        <div class="space-y-5" v-if="salesStore.salesCollection.length">
+          <SaleDetailComp v-for="(sale, index) in salesStore.salesCollection" :key="sale.id" :sale="sale"
+            :index="index" />
+          <p class="text-right text-2xl">Total del día:
+            <span class="font-black">{{ formatCurrency(salesStore.totalSalesDay) }}</span>
+          </p>
+        </div>
+        <p v-else-if="salesStore.noSales" class="text-center text-xl font-bold  text-red-600 animate-pulse">
+          No hay
+          ventas
+          registradas en este
+          día</p>
       </div>
     </div>
   </div>
