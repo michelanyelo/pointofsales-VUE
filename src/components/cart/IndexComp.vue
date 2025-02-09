@@ -38,6 +38,12 @@ const couponStore = useCouponStore();
 
     <CouponComp />
 
+    <button type="button"
+      class="mt-10 w-full bg-gray-800 hover:bg-gray-900 hover:cursor-pointer rounded-xl text-white uppercase font-semibold p-3"
+      @click="cartStore.checkout">
+      pagar
+    </button>
+
   </div>
 </template>
 

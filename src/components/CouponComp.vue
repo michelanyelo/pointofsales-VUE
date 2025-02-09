@@ -24,7 +24,7 @@ const couponStore = useCouponStore();
 
     <!-- Botón -->
     <button type="button"
-      class="p-3 bg-green-400 font-semibold hover:cursor-pointer hover:bg-green-500 rounded-xl disabled:cursor-auto disabled:bg-green-200"
+      class="p-4 bg-green-200 font-semibold hover:cursor-pointer rounded-r-lg hover:bg-green-300 disabled:cursor-auto disabled:bg-green-200"
       @click="couponStore.applyCoupon" :disabled="couponStore.isApplied">Agregar</button>
   </div>
 

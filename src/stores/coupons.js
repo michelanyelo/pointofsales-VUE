@@ -40,6 +40,14 @@ export const useCouponStore = defineStore('coupon', () => {
     }, 6000);
   }
 
+  function $reset() {
+    couponInput.value = '';
+    message.value = '';
+    messageType.value = '';
+    discountPercent.value = 0;
+    discount.value = 0;
+  }
+
   const isApplied = computed(() => discountPercent.value > 0);
 
   return {
@@ -49,6 +57,7 @@ export const useCouponStore = defineStore('coupon', () => {
     messageType,
     discountPercent,
     discount,
-    isApplied
+    isApplied,
+    $reset
   };
 });

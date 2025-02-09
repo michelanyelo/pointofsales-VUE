@@ -1,9 +1,14 @@
 import { computed, ref, watchEffect } from "vue";
 import { defineStore } from "pinia";
+import { getCurrentDate } from "@/helpers/date";
 import { useCouponStore } from "./coupons";
+import { collection, addDoc } from "firebase/firestore";
+import { useFirestore } from "vuefire";
+import { reset } from "@formkit/vue";
 
 export const useCartStore = defineStore('cart', () => {
   const couponStore = useCouponStore();
+  const db = useFirestore();
   const items = ref([]);
   const max_products = 5;
   const totalQuantity = ref(0);
@@ -47,6 +52,43 @@ export const useCartStore = defineStore('cart', () => {
     items.value = items.value.filter(item => item.id !== id)
   }
 
+  async function checkout() {
+    try {
+      // Validar que haya items en el carrito
+      if (items.value.length === 0) {
+        console.error("El carrito está vacío. No se puede realizar la compra.");
+        return;
+      }
+
+      // Mapear los items para eliminar propiedades innecesarias
+      const itemsToSend = items.value.map((item) => {
+        const { stock, category, error, ...data } = item; // Eliminar propiedades no deseadas
+        return data;
+      });
+
+      // Crear el documento de venta
+      await addDoc(collection(db, 'sales'), {
+        items: itemsToSend,
+        subtotal: subtotal.value,
+        total: total.value,
+        discount: Number(couponStore.discount),
+        date: getCurrentDate()
+      });
+      console.log("Compra realizada exitosamente.");
+      $reset();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function $reset() {
+    // Reiniciar el estado
+    items.value = [];
+    subtotal.value = 0;
+    total.value = 0;
+    couponStore.$reset();
+  }
+
   // Verificar si el carrito está vacío
   const isEmpty = computed(() => items.value.length === 0);
 
@@ -66,6 +108,7 @@ export const useCartStore = defineStore('cart', () => {
     addItem,
     updateQuantity,
     removeItem,
+    checkout,
     isEmpty,
     items,
     checkProductStock,
