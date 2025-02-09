@@ -2,7 +2,7 @@ import { computed, ref, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { getCurrentDate } from "@/helpers/date";
 import { useCouponStore } from "./coupons";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, runTransaction, doc } from "firebase/firestore";
 import { useFirestore } from "vuefire";
 
 export const useCartStore = defineStore('cart', () => {
@@ -78,6 +78,17 @@ export const useCartStore = defineStore('cart', () => {
         discount: Number(couponStore.discount),
         date: getCurrentDate()
       });
+
+      // Sustraer la cantidad de lo disponible
+      items.value.forEach(async (item) => {
+        const productRef = doc(db, 'products', item.id);
+        await runTransaction(db, async (transaction) => {
+          const currentProduct = await transaction.get(productRef);
+          const stock = currentProduct.data().stock - item.quantity;
+          transaction.update(productRef, { stock });
+        });
+      });
+
       console.log("Compra realizada exitosamente.");
       $reset();
       couponStore.$reset();
