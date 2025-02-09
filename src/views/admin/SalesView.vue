@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-const date = ref('');
-
+import { useSalesStore } from '@/stores/sales';
+const salesStore = useSalesStore();
 </script>
 
 <template>
@@ -10,20 +9,46 @@ const date = ref('');
     <div class="md:flex md:items-start gap-5">
       <div class="md:w-1/2 lg:w-1/3 bg-white flex justify-center mt-5">
         <!-- Element Plus DatePicker -->
-        <el-date-picker v-model="date" type="daterange" range-separator=" | " start-placeholder="Entrada"
+        <el-date-picker v-model="salesStore.date" type="daterange" range-separator=" | " start-placeholder="Entrada"
           end-placeholder="Salida" format="DD/MM/YYYY" size="large" value-format="DD/MM/YYYY">
           <!-- Slot para el ícono del calendario -->
           <template #prefix>
             <i class="fa-solid fa-calendar-days text-gray-500"></i>
           </template>
         </el-date-picker>
-        {{ date }}
       </div>
       <div class="md:w-1/2 lg:w-2/3 space-y-5 lg:h-screen lg:overflow-y-scroll p-5 pb-32">
-        <p>Ventas aquí</p>
+        <p class="text-center text-xl font-bold text-green-600 animate-pulse" v-if="!salesStore.isDateSelected">
+          Selecciona un rango de fechas para ver las ventas
+        </p>
+        <p class="text-center text-lg" v-else>
+          Ventas de la fecha:
+          <span class="font-black text-green-600">{{ salesStore.date }}</span>
+        </p>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.text-green-600 {
+  color: #42b983;
+  /* Verde de Vue */
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+</style>
