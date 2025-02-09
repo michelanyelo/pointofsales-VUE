@@ -15,7 +15,7 @@ export const useProductsStore = defineStore('products', () => {
 
   const categories = [
     { id: 1, name: 'Sudaderas' },
-    { id: 2, name: 'Tenis' },
+    { id: 2, name: 'Zapatos' },
     { id: 3, name: 'Lentes' }
   ];
 
