@@ -26,7 +26,7 @@ const productsStore = useProductsStore();
     </div>
 
     <nav class="py-3">
-      <NavlinkComp url-name="admin">Administrar</NavlinkComp>
+      <NavlinkComp :to="{ name: 'products' }">Administrar</NavlinkComp>
     </nav>
   </header>
 </template>
