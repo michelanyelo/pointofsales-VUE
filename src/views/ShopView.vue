@@ -11,7 +11,7 @@ const productsStore = useProductsStore();
 <template>
   <NavMainComp />
 
-  <main class="pt-20 lg:flex lg:h-screen lg:overflow-y-hidden">
+  <main class="mt-50 lg:mt-20 lg:flex lg:h-screen lg:overflow-y-hidden">
     <div class="lg:w-2/3 lg:h-screen lg:overflow-y-scroll pt-10 mt-10 pb-32 px-10">
       <p v-if="productsStore.noResults" class="text-center text-4xl">No hay productos</p>
 
